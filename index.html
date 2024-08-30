@@ -1,16 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
-		<meta charset="utf-8">
-		<title></title>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta queryName="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" type="text/css" href="./common.css" />
+		<title>Document</title>
 	</head>
-	<body>
-		<div>Hello Word11</div>
-	</body>
-	<script>
-		alert(222)
-		// 父页面
-		document.querySelector('iframe').contentWindow.postMessage({ param1: 'value1' }, '*');
+	<body style="background-color: black">
+		<h2>iframe页面</h2>
+		<button onclick="iframeDoAction()">❤ 点击触发iframe页面的事件 ❤</button>
+		<script>
+			const iframeDoAction = () => {
+				console.log("iframe页面的事件：iframeDoAction");
+			};
 
-	</script>
+
+			// 父页面传递数据给子页面：--start
+			const iframeReceiveData = (data) => {
+				console.log("iframe页面的事件：iframeReceiveData");
+				console.log(data)
+			};
+			window.onload = function() {
+				window.addEventListener('message', function(e) {
+					iframeReceiveData(e.data)
+				})
+			}
+			// 父页面传递数据给子页面：--end
+		</script>
+	</body>
 </html>
